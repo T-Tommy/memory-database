@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/T-Tommy/memory-database/issues"
   },
-  "homepage": "https://github.com/T-Tommy/memory-database#readme"
+  "homepage": "https://github.com/T-Tommy/memory-database#readme",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "jest": "^24.6.0"
+  }
 }
