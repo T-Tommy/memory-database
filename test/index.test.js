@@ -102,11 +102,22 @@ describe('findByIDAndUpdate tests', () => {
     expect(update._id).toEqual(copy._id);
     expect(result.store[copy._id]).toEqual(update);
   });
-  // it('Does what?', () => {
-  //   const expected = ;
-  //   const input = ;
-  //   const result = ;
   
-  //   expect(result).toEqual(expected);
-  // });
+  it('Return null if no id', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const result = new MemoryDatabase();
+    const copy = result.create(input);
+    const addObject = {
+      sport: 'baseball',
+      skill: 'sure'
+    };
+
+    const update = result.findByIdAndUpdate(addObject, 'somerandomstring');
+  
+    expect(update).toEqual(null);
+    expect(result.store[copy._id]).toEqual(copy);
+  });
 });
