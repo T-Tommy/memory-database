@@ -46,7 +46,7 @@ describe('findByID tests', () => {
 
     const idToLookUp = copy._id;
 
-    expect(result.findByID(idToLookUp)).toEqual(copy);
+    expect(result.findById(idToLookUp)).toEqual(copy);
   });
 
   it('returns null if no matching id', () => {
@@ -54,7 +54,7 @@ describe('findByID tests', () => {
 
     const idToLookUp = 'somerandomstring';
 
-    expect(result.findByID(idToLookUp)).toEqual(null);
+    expect(result.findById(idToLookUp)).toEqual(null);
   });
 });
 
@@ -80,4 +80,33 @@ describe('find', () => {
 
     expect(result.find()).toEqual(expected);
   });
+});
+
+describe('findByIDAndUpdate tests', () => {
+  it('replaces object with new object at a uuid', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const result = new MemoryDatabase();
+    const copy = result.create(input);
+    const addObject = {
+      sport: 'baseball',
+      skill: 'sure'
+    };
+
+    const update = result.findByIdAndUpdate(addObject, copy._id);
+
+    expect(update.sport).toEqual('baseball');
+    expect(update.skill).toEqual('sure');
+    expect(update._id).toEqual(copy._id);
+    expect(result.store[copy._id]).toEqual(update);
+  });
+  // it('Does what?', () => {
+  //   const expected = ;
+  //   const input = ;
+  //   const result = ;
+  
+  //   expect(result).toEqual(expected);
+  // });
 });
