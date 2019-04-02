@@ -57,3 +57,27 @@ describe('findByID tests', () => {
     expect(result.findByID(idToLookUp)).toEqual(null);
   });
 });
+
+describe('find', () => {
+  it('returns an array of all the objects in the store', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const input2 = {
+      name: 'No',
+      age: 3
+    };
+    const input3 = {
+      name: 'Maybe',
+      age: 42
+    };
+    const result = new MemoryDatabase();
+    const copy = result.create(input);
+    const copy2 = result.create(input2);
+    const copy3 = result.create(input3);
+    const expected = [copy, copy2, copy3];
+
+    expect(result.find()).toEqual(expected);
+  });
+});
