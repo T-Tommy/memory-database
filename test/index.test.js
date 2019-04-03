@@ -79,6 +79,9 @@ describe('find', () => {
     const expected = [copy, copy2, copy3];
 
     expect(result.find()).toEqual(expected);
+    result.drop();
+    const found = result.find();
+    expect(found).toEqual([]);
   });
 });
 
@@ -172,7 +175,7 @@ describe('drop', () => {
     result.create(input3);
     const expected = {};
     result.drop();
-    
+
     expect(result.store).toEqual(expected);
   });
 });
