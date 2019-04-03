@@ -151,3 +151,28 @@ describe('findByIdAndDelete', () => {
     expect(result.store[copy._id]).toEqual(copy);
   });
 });
+
+describe('drop', () => {
+  it('resets the store', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const input2 = {
+      name: 'No',
+      age: 3
+    };
+    const input3 = {
+      name: 'Maybe',
+      age: 42
+    };
+    const result = new MemoryDatabase();
+    result.create(input);
+    result.create(input2);
+    result.create(input3);
+    const expected = {};
+    result.drop();
+    
+    expect(result.store).toEqual(expected);
+  });
+});
