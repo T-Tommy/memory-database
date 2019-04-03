@@ -102,7 +102,7 @@ describe('findByIDAndUpdate tests', () => {
     expect(update._id).toEqual(copy._id);
     expect(result.store[copy._id]).toEqual(update);
   });
-  
+
   it('Return null if no id', () => {
     const input = {
       name: 'Yes',
@@ -118,6 +118,36 @@ describe('findByIDAndUpdate tests', () => {
     const update = result.findByIdAndUpdate(addObject, 'somerandomstring');
   
     expect(update).toEqual(null);
+    expect(result.store[copy._id]).toEqual(copy);
+  });
+});
+
+describe('findByIdAndDelete', () => {
+  it('removes an object by id', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const result = new MemoryDatabase();
+    const copy = result.create(input);
+
+    const deleted = result.findByIdAndDelete(copy._id);
+    const shouldBeNull = result.findById(copy._id);
+    expect(deleted).toEqual(copy);
+    expect(shouldBeNull).toEqual(null);
+  });
+  
+  it('removes an object by id returns null if no matching id', () => {
+    const input = {
+      name: 'Yes',
+      age: 5
+    };
+    const result = new MemoryDatabase();
+    const copy = result.create(input);
+
+    const deleted = result.findByIdAndDelete('randomstring');
+    
+    expect(deleted).toEqual(null);
     expect(result.store[copy._id]).toEqual(copy);
   });
 });
